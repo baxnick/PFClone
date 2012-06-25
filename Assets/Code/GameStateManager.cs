@@ -22,6 +22,7 @@ public abstract class UnityGameState
 	}
 }
 
+[ExecuteInEditMode()]
 public class GameStateManager : MonoBehaviour
 {
 	private UnityGameState State {get; set;}
@@ -92,7 +93,6 @@ public class GameStateManager : MonoBehaviour
 		public override void Clicked (Coords location)
 		{
 				PieceType piece = GameObject.Find("TheGame").GetComponent<PlacementHUD>().SelectedPiece;
-				Player owner = Game.Master ().Turn.TurnPlayer;
 				
 				bool success = Game.Master().Turn.Control().Place(piece, location);
 			

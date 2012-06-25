@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class PieceHandler : MonoBehaviour {
 	public int ID;
+	private Quaternion StartingOrientation;
 	
 	// Use this for initialization
 	void Start () {
@@ -50,9 +51,13 @@ public class PieceHandler : MonoBehaviour {
 				transform.parent.position = Vector3.Slerp(originTransform, targetTransform, t);
 				yield return null;	
 			}
-			transform.GetComponent<Rigidbody>().isKinematic = true;
 			
-			yield return StartCoroutine(SnapBack(snapTime));
+			if (Game.Master().Winner() == null)
+			{
+				transform.GetComponent<Rigidbody>().isKinematic = true;
+				
+				yield return StartCoroutine(SnapBack(snapTime));
+			}
 		}
 	}
 	
@@ -78,15 +83,22 @@ public class PieceHandler : MonoBehaviour {
 		Vector3 originTransform = transform.localPosition;
 		Vector3 targetTransform = new Vector3(0f, 0f, 0f);
 		
+		Quaternion originRotation = transform.localRotation;
+		
 		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / time)
 		{
 			transform.localPosition = Vector3.Slerp(originTransform, targetTransform, t);
+			transform.localRotation = Quaternion.Slerp(originRotation, StartingOrientation, t);
 			yield return null;	
 		}
+		
+		transform.localPosition = targetTransform;
+		transform.localRotation = StartingOrientation;
 	}
 	
 	public void OnSpawned()
 	{
+		StartingOrientation = transform.localRotation;
 		StartCoroutine(DropperLoop(1.0f, 0.5f));
 	}
 	

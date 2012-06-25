@@ -6,7 +6,7 @@ public class AIWatcher : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(AnimationLoop(2.0f));
+		StartCoroutine(AnimationLoop(1.0f));
 	}
 	
 	// Update is called once per frame
