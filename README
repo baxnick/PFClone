@@ -1,0 +1,2 @@
+A Unity implementation of the Push Fight boardgame. Features a Solitaire and AI mode.
+In order to run / build the project you will first need to clone the PFCloneLogic repository to the PushFightLogic directory. After compiling that, the project is ready for use.
