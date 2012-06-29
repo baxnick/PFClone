@@ -13,7 +13,6 @@ def addFolderToZip(myZipFile,folder,prefixPath):
 
 with ZipFile('pushfight.zip', 'w') as myzip:
     myzip.write('pushfight.exe', 'pushfight/pushfight.exe')
-    myzip.write('board.txt', 'pushfight/board.txt')
     myzip.write('ai.mgbmp', 'pushfight/ai.mgbmp')
     myzip.write('ai.mgbmr', 'pushfight/ai.mgbmr')
     myzip.write('ai.mgdat', 'pushfight/ai.mgdat')

@@ -12,7 +12,7 @@ public class SetupGameBoard : MonoBehaviour {
 		if (GameObject.Find ("GameBoard") != null) DestroyImmediate(GameObject.Find ("GameBoard"));
 		GameObject emptyTileContainer = new GameObject("GameBoard");
 		
-		Board board = Board.CreateFromFile ("board.txt");
+		Board board = Board.Create();
 		foreach (BoardSquare tile in board.Squares) {
 			Vector3 pos = transform.position;
 			pos.x += tile.Pos.x * 1.01f;
