@@ -1,64 +1,80 @@
+
 using UnityEngine;
 using System.Collections;
 using PushFightLogic;
 using SeeSharpMessenger;
 
-public class PlacementHUD : MonoBehaviour {
+public class PlacementHUD : MonoBehaviour
+{
 	public Texture PlacementHintImage;
 	public Texture PlacementFlash;
+
 	
-	public PieceType SelectedPiece {get; private set;}
+	public PieceType SelectedPiece { get; private set; }
+
+
 	public bool IsPlacementPhase = false;
 	private bool keyWasPressed = false;
 	
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 	}
+
 	
-	void OnEnable() {
-		Messenger<Player, string>.AddListener("turn.phase", ChangedPhase);
+	void OnEnable ()
+	{
+		Messenger<Player, string>.AddListener ("turn.phase", ChangedPhase);
 	}
+
 	
-	void OnDisable() {
-		Messenger<Player, string>.RemoveListener("turn.phase", ChangedPhase);
+	void OnDisable ()
+	{
+		Messenger<Player, string>.RemoveListener ("turn.phase", ChangedPhase);
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.Alpha1))
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
 			SelectedPiece = PieceType.ROUND;
 			keyWasPressed = true;
 		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		else if (Input.GetKeyDown (KeyCode.Alpha2))
 		{
 			SelectedPiece = PieceType.SQUARE;
 			keyWasPressed = true;
 		}
 	}
+
 	
 	private float acknowledgeAlpha = 0.0f;
-	private IEnumerator FlashAcknowledge(float aValue, float aTime)
+
+
+	private IEnumerator FlashAcknowledge (float aValue, float aTime)
 	{
 		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
-    	{
-			acknowledgeAlpha = Mathf.Lerp(aValue,0.0f,t);
+		{
+			acknowledgeAlpha = Mathf.Lerp (aValue, 0.0f, t);
 			yield return null;
 		}
 	}
+
 	
-	void OnGUI() {
+	void OnGUI ()
+	{
 		if (IsPlacementPhase)
 		{
-			GUI.DrawTexture(new Rect(10, Screen.height - 74, 128, 64), PlacementHintImage);
-			GUI.color = new Color(1.0f, 1.0f, 1.0f, acknowledgeAlpha);
-			GUI.DrawTexture(new Rect(10, Screen.height - 74, 128, 64), PlacementFlash);
+			GUI.DrawTexture (new Rect (10, Screen.height - 74, 128, 64), PlacementHintImage);
+			GUI.color = new Color (1.0f, 1.0f, 1.0f, acknowledgeAlpha);
+			GUI.DrawTexture (new Rect (10, Screen.height - 74, 128, 64), PlacementFlash);
 			GUI.color = Color.white;
 			
 			if (keyWasPressed)
 			{
 				keyWasPressed = false;
-				StartCoroutine(FlashAcknowledge(0.7f, 0.5f));
+				StartCoroutine (FlashAcknowledge (0.7f, 0.5f));
 			}
 		}	
 	}
@@ -66,10 +82,14 @@ public class PlacementHUD : MonoBehaviour {
 	// turn.phase
 	private void ChangedPhase (Player p, string name)
 	{
-		if (name.Equals("Placement"))
+		if (name.Equals ("Placement"))
+		{
 			IsPlacementPhase = true;
+		}
 		else
+		{
 			IsPlacementPhase = false;
+		}
 	}
 
 }
