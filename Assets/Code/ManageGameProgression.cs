@@ -74,7 +74,7 @@ public class ManageGameProgression : MonoBehaviour
 
 	
 	const float AI_PRE_TIME = 2.0f;
-	const float AI_THINKING_TIME = 30.0f;
+	const float AI_THINKING_TIME = 40.0f;
 	const float AI_CLEANUP_TIME = 10.0f;
 	bool AIFinished;
 
