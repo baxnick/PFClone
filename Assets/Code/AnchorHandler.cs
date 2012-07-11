@@ -4,6 +4,10 @@ using System.Collections;
 using SeeSharpMessenger;
 using PushFightLogic;
 
+/// <summary>
+/// This behaviour monitors anchor related events and 
+/// updates the position and visibility of the game object accordingly.
+/// </summary>
 public class AnchorHandler : MonoBehaviour
 {
 	private GameObject Sphere;
@@ -30,13 +34,6 @@ public class AnchorHandler : MonoBehaviour
 		Messenger<Coords>.RemoveListener ("piece.anchored", OnPieceAnchored);
 		Messenger.RemoveListener ("piece.unanchored", OnPieceUnAnchored);	
 	}
-		
-	// Update is called once per frame
-	void Update ()
-	{
-	
-	}
-
 	
 	void OnGameBegin ()
 	{

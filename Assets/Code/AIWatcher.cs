@@ -2,6 +2,9 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Monitors the AI <c>NodesEvaluated</c> property and provides a GUI text field displaying it.
+/// </summary>
 public class AIWatcher : MonoBehaviour
 {
 	private string nodesExplored = "";
@@ -10,12 +13,6 @@ public class AIWatcher : MonoBehaviour
 	void Start ()
 	{
 		StartCoroutine (AnimationLoop (1.0f));
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
 	}
 
 	

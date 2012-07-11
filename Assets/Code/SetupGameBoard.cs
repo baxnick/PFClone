@@ -3,7 +3,14 @@ using UnityEngine;
 using System.Collections;
 using PushFightLogic;
 
-[ExecuteInEditMode()]  
+[ExecuteInEditMode()]
+/// <summary>
+/// Composes the game board graphics and scripts using a prototype representation of the board.
+/// </summary>
+/// <remarks>
+/// Executes in edit mode to make it easy to be able to place 
+/// camera etc correctly during development.
+/// </remarks>
 public class SetupGameBoard : MonoBehaviour
 {
 	public GameObject tileGameObject;

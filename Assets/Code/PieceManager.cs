@@ -6,24 +6,15 @@ using PushFightLogic;
 using System.Collections.Generic;
 using SeeSharpMessenger;
 
+/// <summary>
+/// Monitors piece placement events and spawns a new graphical representation when one is detected.
+/// </summary>
 public class PieceManager : MonoBehaviour
 {
 	public GameObject SquareToken;
 	public GameObject RoundToken;
 	public Material blackMat;
 	public Material whiteMat;
-	
-	// Use this for initialization
-	void Start ()
-	{
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
-	}
-
 	
 	void OnEnable ()
 	{

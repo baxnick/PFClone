@@ -5,6 +5,9 @@ using PushFightLogic;
 using SeeSharpMessenger;
 using System.Collections.Generic;
 
+/// <summary>
+/// Monitors events relating to the piece it represents and animates accordingly.
+/// </summary>
 public class PieceHandler : MonoBehaviour
 {
 	public int ID;
@@ -15,13 +18,6 @@ public class PieceHandler : MonoBehaviour
 	{
 		StartCoroutine (AnimationLoop (1.0f, 0.3f));
 	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
-	}
-
 	
 	void OnEnable ()
 	{

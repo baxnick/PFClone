@@ -5,34 +5,11 @@ using SeeSharpMessenger;
 using PushFightLogic;
 using System.Collections.Generic;
 
-public abstract class UnityGameState
-{
-	protected GameStateManager Context { get; private set; }
-
-	
-	public abstract void Clicked (Coords location);
-
-	
-	public virtual void Skipped ()
-	{
-		Game.Master ().Turn.Control ().Skip ();
-	}
-
-
-	public abstract void Enter ();
-
-
-	public abstract void Exit ();
-
-	
-	public UnityGameState (GameStateManager context)
-	{
-		Context = context;	
-	}
-}
-
-
 [ExecuteInEditMode()]
+/// <summary>
+/// Handles mouse input from the player and relays the appropriate graphical updates and/or
+/// messages to the game logic depending on the current game state.
+/// </summary>
 public class GameStateManager : MonoBehaviour
 {
 	private UnityGameState State { get; set; }
@@ -65,7 +42,7 @@ public class GameStateManager : MonoBehaviour
 	}
 
 	
-	public void SwapState (UnityGameState newState)
+	void SwapState (UnityGameState newState)
 	{
 		if (State != null)
 		{
@@ -87,7 +64,7 @@ public class GameStateManager : MonoBehaviour
 		}
 	}
 	
-	//turn.phase
+	//turn.phase message
 	private void MonitorPhases (Player p, string phase)
 	{
 		if (phase.Equals ("Placement"))
@@ -108,7 +85,7 @@ public class GameStateManager : MonoBehaviour
 		}
 	}
 	
-	//tile.clicked
+	//tile.clicked message
 	private void Clicked (Coords location)
 	{
 		if (State == null)
@@ -139,7 +116,33 @@ public class GameStateManager : MonoBehaviour
 		}	
 	}
 	
-	public class PlacementState : UnityGameState
+	abstract class UnityGameState
+	{
+		protected GameStateManager Context { get; private set; }
+	
+		
+		public abstract void Clicked (Coords location);
+	
+		
+		public virtual void Skipped ()
+		{
+			Game.Master ().Turn.Control ().Skip ();
+		}
+	
+	
+		public abstract void Enter ();
+	
+	
+		public abstract void Exit ();
+	
+		
+		public UnityGameState (GameStateManager context)
+		{
+			Context = context;	
+		}
+	}
+	
+	class PlacementState : UnityGameState
 	{
 		public PlacementState (GameStateManager context) : base(context)
 		{
@@ -173,7 +176,7 @@ public class GameStateManager : MonoBehaviour
 	}
 
 	
-	public class SelectPieceToMoveState : UnityGameState
+	class SelectPieceToMoveState : UnityGameState
 	{
 		public SelectPieceToMoveState (GameStateManager context) : base(context)
 		{
@@ -205,7 +208,7 @@ public class GameStateManager : MonoBehaviour
 	}
 
 	
-	public class MovePieceState : UnityGameState
+	class MovePieceState : UnityGameState
 	{
 		private Coords LocationToMove;
 
@@ -244,7 +247,7 @@ public class GameStateManager : MonoBehaviour
 	}
 
 	
-	public class SelectPieceToPushState : UnityGameState
+	class SelectPieceToPushState : UnityGameState
 	{
 		public SelectPieceToPushState (GameStateManager context) : base(context)
 		{
@@ -277,7 +280,7 @@ public class GameStateManager : MonoBehaviour
 	}
 
 	
-	public class PushPieceState : UnityGameState
+	class PushPieceState : UnityGameState
 	{
 		private Coords PieceToPush;
 

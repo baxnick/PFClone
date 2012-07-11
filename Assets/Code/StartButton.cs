@@ -4,16 +4,14 @@ using System.Collections;
 using PushFightLogic;
 using SeeSharpMessenger;
 
+/// <summary>
+/// When the game is not active, this button displays itself, allowing the player to (re)start the game.
+/// When the game is active, it shows information about the current game progress.
+/// </summary>
 public class StartButton : MonoBehaviour
 {
 	public bool GameStarted = false;
 	private Player CurrentPlayer;
-	
-	// Use this for initialization
-	void Start ()
-	{
-	}
-	
 	
 	void OnEnable ()
 	{
@@ -29,13 +27,6 @@ public class StartButton : MonoBehaviour
 		Messenger<Player>.RemoveListener ("turn.begin", TurnBegin);
 		Messenger<Player>.RemoveListener ("game.over", GameOver);
 	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
-	}
-
 	
 	void OnGUI ()
 	{

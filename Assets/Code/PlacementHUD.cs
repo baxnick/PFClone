@@ -4,6 +4,10 @@ using System.Collections;
 using PushFightLogic;
 using SeeSharpMessenger;
 
+/// <summary>
+/// Displays a help graphic during placment phase showing piece types.
+/// Monitors keyboard and changes the piece type being placed accordingly.
+/// </summary>
 public class PlacementHUD : MonoBehaviour
 {
 	public Texture PlacementHintImage;
@@ -16,18 +20,11 @@ public class PlacementHUD : MonoBehaviour
 	public bool IsPlacementPhase = false;
 	private bool keyWasPressed = false;
 	
-	// Use this for initialization
-	void Start ()
-	{
-	}
-
-	
 	void OnEnable ()
 	{
 		Messenger<Player, string>.AddListener ("turn.phase", ChangedPhase);
 	}
 
-	
 	void OnDisable ()
 	{
 		Messenger<Player, string>.RemoveListener ("turn.phase", ChangedPhase);
